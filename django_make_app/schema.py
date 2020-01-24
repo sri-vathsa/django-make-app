@@ -30,13 +30,13 @@ class StructureKeyword(object):
 
 MAPPINGS = {
     # Relations
-    "fk": (lambda field_name: "ForeignKey(\"__app__.{to}\")".format(to=field_name.title())),
+    "fk": (lambda field_name: "ForeignKey(\"__app__.{to}\", on_delete=models.CASCADE)".format(to=field_name.title())),
     "o2o": (lambda field_name: "ForeignKey(\"{to}\")".format(to=field_name)),
     "m2m": (lambda field_name: "ForeignKey(\"{to}\")".format(to=field_name)),
 
     # Types
     "text": (lambda *args, **kwargs: "TextField()"),
-    "char": (lambda *args, **kwargs: "CharField(max_length=\"{max_length}\")".format(max_length=255)),
+    "char": (lambda *args, **kwargs: "CharField(max_length={max_length})".format(max_length=255)),
     "boolean": (lambda *args, **kwargs: "BooleanField()"),
     "date": (lambda *args, **kwargs: "DateField()"),
     "datetime": (lambda *args, **kwargs: "DateTimeField()"),
